@@ -22,6 +22,7 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
-        "@heroicons/react": "^2.0.11"
+        "@heroicons/react": "^2.0.11",
+        "react-trix": "^0.10.0"
     }
 }

@@ -12,9 +12,9 @@ import {
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
 const sidebarNavigation = [
-    { name: "Home", href: "#", icon: HomeIcon, current: true },
-    { name: "Events", href: "#", icon: CalendarDaysIcon, current: false },
-    { name: "Tickets", href: "#", icon: TicketIcon, current: false },
+    { name: "Home", href: "/dashboard", icon: HomeIcon, current: false },
+    { name: "Events", href: "/events", icon: CalendarDaysIcon, current: false },
+    { name: "Tickets", href: "/tickets", icon: TicketIcon, current: false },
     { name: "Users", href: "#", icon: UsersIcon, current: false },
     ,
 ];
@@ -30,6 +30,37 @@ function classNames(...classes) {
 export default function Authenticated({ auth, children }) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+    const sidebarNavigationItem = (item) => {
+        if (window.location.pathname == item.href) {
+            item.current = true;
+        }
+
+        return (
+            <a
+                key={item.name}
+                href={item.href}
+                className={classNames(
+                    item.current
+                        ? "bg-gray-800 text-white"
+                        : "text-gray-300 hover:bg-gray-500 hover:text-white",
+                    "group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium uppercase"
+                )}
+                aria-current={item.current ? "page" : undefined}
+            >
+                <item.icon
+                    className={classNames(
+                        item.current
+                            ? "text-white"
+                            : "text-gray-300 group-hover:text-white",
+                        "h-6 w-6"
+                    )}
+                    aria-hidden="true"
+                />
+                <span className="mt-2">{item.name}</span>
+            </a>
+        );
+    };
+
     return (
         <>
             <div className="flex h-full">
@@ -44,32 +75,9 @@ export default function Authenticated({ auth, children }) {
                             />
                         </div>
                         <div className="flex-1 w-full px-2 mt-6 space-y-1">
-                            {sidebarNavigation.map((item) => (
-                                <a
-                                    key={item.name}
-                                    href={item.href}
-                                    className={classNames(
-                                        item.current
-                                            ? "bg-gray-800 text-white"
-                                            : "text-gray-300 hover:bg-gray-500 hover:text-white",
-                                        "group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium uppercase"
-                                    )}
-                                    aria-current={
-                                        item.current ? "page" : undefined
-                                    }
-                                >
-                                    <item.icon
-                                        className={classNames(
-                                            item.current
-                                                ? "text-white"
-                                                : "text-gray-300 group-hover:text-white",
-                                            "h-6 w-6"
-                                        )}
-                                        aria-hidden="true"
-                                    />
-                                    <span className="mt-2">{item.name}</span>
-                                </a>
-                            ))}
+                            {sidebarNavigation.map((item) => {
+                                return sidebarNavigationItem(item);
+                            })}
                         </div>
                     </div>
                 </div>

@@ -1,10 +1,10 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
-export default function PageHeader({ title, showAddButton }) {
+export default function PageHeader({ title, showSlideOver }) {
     return (
         <div>
             <div>
-                <nav className="sm:hidden" aria-label="Back">
+                {/* <nav className="sm:hidden" aria-label="Back">
                     <a
                         href="#"
                         className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700"
@@ -15,7 +15,7 @@ export default function PageHeader({ title, showAddButton }) {
                         />
                         Back
                     </a>
-                </nav>
+                </nav> */}
                 <nav className="hidden sm:flex" aria-label="Breadcrumb">
                     <ol role="list" className="flex items-center space-x-4">
                         <li>
@@ -67,8 +67,9 @@ export default function PageHeader({ title, showAddButton }) {
                     </h2>
                 </div>
                 <div className="flex flex-shrink-0 mt-4 md:mt-0 md:ml-4">
-                    {showAddButton && (
+                    {showSlideOver != null && (
                         <button
+                            onClick={() => showSlideOver(true)}
                             type="button"
                             className="inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-white bg-gray-600 border border-transparent rounded-md shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         >
